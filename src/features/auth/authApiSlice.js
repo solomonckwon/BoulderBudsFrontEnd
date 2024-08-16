@@ -17,11 +17,17 @@ export const authApiSlice = apiSlice.injectEndpoints({
             }),
             async onQueryStarted(arg, { dispatch, queryFulfilled }) {
                 try {
-                    //const { data } = 
-                    await queryFulfilled
-                    //console.log(data)
+                    const { data } = await queryFulfilled
+                    console.log(data)
                     dispatch(logOut())
                     dispatch(apiSlice.util.resetApiState())
+                    
+
+                    // ??? this is how to get rid of last subscribed state
+                    // after log out, still sees old notes/user lists
+                    setTimeout(() => {
+                        dispatch(apiSlice.util.resetApiState())
+                    }, 1000)
                 } catch (err) {
                     console.log(err)
                 }

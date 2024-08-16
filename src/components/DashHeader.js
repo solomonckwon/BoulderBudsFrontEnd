@@ -34,11 +34,15 @@ const DashHeader = () => {
         dashClass = "dash-header__container--small"
     }
 
+    const handleLogout = () => {
+        sendLogout()
+        navigate('/')
+    }
     const logoutButton = (
         <button
             className="icon-button"
             title="Logout"
-            onClick={sendLogout}
+            onClick={handleLogout}
         >
             <FontAwesomeIcon icon={faRightFromBracket} />
         </button>

@@ -10,13 +10,13 @@
 
 :root {
   /* COLORS */
-  --BGCOLOR: #16712284;
-  --BORDER-COLOR: #FFF;
+  --BGCOLOR: hsla(103, 8%, 16%, 0.375);
+  --BORDER-COLOR: #ffffffa7;
   --COLOR: #FFF;
   --ERROR: firebrick;
   --INACTIVE: lightgray;
   --LINK-COLOR: whitesmoke;
-  --LINK-HOVER: rgba(245, 245, 245, 0.9);
+  --LINK-HOVER: rgba(206, 206, 206, 0.9);
   --NOTE-BGCOLOR: hsla(240, 64%, 27%, 0.65);
   --STATUS-COMPLETE: limegreen;
   --STATUS-OPEN: firebrick;
@@ -128,6 +128,15 @@ a:focus-visible {
 .public__addr {
   margin-top: 1em;
 }
+
+.public-header {
+  font-size: larger;
+  text-align: center;
+}
+
+/* .public-footer {
+  text-align: right;
+} */
 
 .welcome a::before {
   content: "➜ "

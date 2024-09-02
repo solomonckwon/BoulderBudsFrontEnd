@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap');
 
 * {
   margin: 0;
@@ -65,7 +65,7 @@
 /* || GENERAL STYLES */
 
 body {
-  font-family: 'Nunito', sans-serif;
+  font-family: "SUSE", sans-serif;
   min-height: 100vh;
   background-color: var(--BGCOLOR);
   color: var(--COLOR);
@@ -132,6 +132,7 @@ a:focus-visible {
 .public-header {
   font-size: larger;
   text-align: center;
+  font-weight: 700;
 }
 
 /* .public-footer {
@@ -140,6 +141,77 @@ a:focus-visible {
 
 .welcome a::before {
   content: "➜ "
+}
+
+/* NAVBAR */
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  position: relative;
+}
+
+/* Logo Container */
+.nav-logo-container img {
+  height: 40px; /* Adjust according to your logo's size */
+}
+
+/* Navbar Links Container */
+.navbar-links-container {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Space between links */
+}
+
+.navbar-links-container a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.navbar-links-container a:hover {
+  color: #f0f0f0; /* Light color on hover */
+}
+
+.navbar-cart-icon {
+  font-size: 24px; /* Adjust size */
+  color: #fff;
+}
+
+.primary-button {
+  background-color: #007bff; /* Primary button color */
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.primary-button:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+}
+
+/* Navbar Menu Container */
+.navbar-menu-container {
+  display: none; /* Hide menu icon on larger screens */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .navbar-links-container {
+    display: none; /* Hide links on mobile */
+  }
+
+  .navbar-menu-container {
+    display: block; /* Show menu icon on mobile */
+  }
 }
 
 /* || DASH HEADER, CONTAINER & FOOTER */

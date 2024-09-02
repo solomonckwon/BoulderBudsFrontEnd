@@ -18,7 +18,7 @@ const NOTES_REGEX = /^\/dash\/notes(\/)?$/
 const USERS_REGEX = /^\/dash\/users(\/)?$/
 
 const DashHeader = () => {
-    const { isManager, isAdmin } = useAuth()
+    const { isManager, isAdmin, status } = useAuth()
 
     const navigate = useNavigate()
     const { pathname } = useLocation()
@@ -102,16 +102,18 @@ const DashHeader = () => {
         sendLogout(); // Assuming this function logs the user out
         navigate('/'); // Navigate to the root URL after logout
     };
-    const logoutButton = (
-        <button
-            className="icon-button"
-            title="Logout"
-            onClick={handleLogout}
-        >
-            <FontAwesomeIcon icon={faRightFromBracket} />
-        </button>
-    )
-
+    let logoutButton = null
+    if (status) { 
+        logoutButton = (
+            <button
+                className="icon-button"
+                title="Logout"
+                onClick={handleLogout}
+            >
+                <FontAwesomeIcon icon={faRightFromBracket} />
+            </button>
+        )
+    }
     const errClass = isError ? "errmsg" : "offscreen"
 
     let buttonContent

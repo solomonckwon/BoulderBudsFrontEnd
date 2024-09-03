@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import useAuth from '../../hooks/useAuth'
 
 const Welcome = () => {
-    const { username, isManager, isAdmin } = useAuth()
+    const { username, isAdmin } = useAuth()
 
     const date = new Date()
     const today = new Intl.DateTimeFormat('en-US', { dateStyle: 'full', timeStyle: 'long' }).format(date)
@@ -18,9 +18,9 @@ const Welcome = () => {
 
             <p><Link to="/dash/notes/new">Add New Notes</Link></p>
 
-            {(isManager || isAdmin) && <p><Link to="/dash/users">View User Settings</Link></p>}
+            {(isAdmin) && <p><Link to="/dash/users">View User Settings</Link></p>}
 
-            {(isManager || isAdmin) && <p><Link to="/dash/users/new">Add New User</Link></p>}
+            {(isAdmin) && <p><Link to="/dash/users/new">Add New User</Link></p>}
 
         </section>
     )

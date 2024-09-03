@@ -4,26 +4,28 @@ import { jwtDecode } from 'jwt-decode'
 
 const useAuth = () => {
     const token = useSelector(selectCurrentToken)
-    let isManager = false 
+    let isRock = false 
+    let isBoulder = false 
     let isAdmin = false 
-    let status = null
+    let status = 'Pebble'
+
 
     if (token) {
         const decoded = jwtDecode(token)
         const {username, roles } = decoded.UserInfo
         
-        isManager = roles.includes('Manager')
+        isRock = roles.includes('Rock')
+        isBoulder = roles.includes('Boulder')
         isAdmin = roles.includes('Admin')
 
-        let status = 'Employee'
-        if (isManager) status = 'Manager'
-        // Check admin after manager, since admin is a higher permission role
+        if (isRock) status = 'Rock'
+        if (isBoulder) status = 'Boulder'
         if (isAdmin) status = 'Admin'
 
-        return { username, roles, status, isManager, isAdmin }
+        return { username, roles, status, isRock, isBoulder, isAdmin }
     }
 
-    return { username: '', roles: [], isManager, isAdmin, status}
+    return { username: '', roles: [], isRock, isBoulder, isAdmin, status}
 }
 
 export default useAuth

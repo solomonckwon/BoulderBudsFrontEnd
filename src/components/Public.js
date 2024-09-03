@@ -1,10 +1,8 @@
 import { Link } from 'react-router-dom'
-import Navbar from './Navbar'
 
 const Public = () => {
     const content = (
         <>
-            < Navbar />
             
             <section className="public">
                 <header className='public-header'>

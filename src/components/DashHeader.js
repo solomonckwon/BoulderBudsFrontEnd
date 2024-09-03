@@ -13,12 +13,14 @@ import { useSendLogoutMutation } from '../features/auth/authApiSlice'
 
 import useAuth from '../hooks/useAuth'
 
+import Logo from "../assets/Logo.svg";
+
 const DASH_REGEX = /^\/dash(\/)?$/
 const NOTES_REGEX = /^\/dash\/notes(\/)?$/
 const USERS_REGEX = /^\/dash\/users(\/)?$/
 
 const DashHeader = () => {
-    const { isManager, isAdmin, status } = useAuth()
+    const { isAdmin, status } = useAuth()
 
     const navigate = useNavigate()
     const { pathname } = useLocation()
@@ -71,7 +73,7 @@ const DashHeader = () => {
     }
 
     let userButton = null
-    if (isManager || isAdmin) {
+    if (isAdmin) {
         if (!USERS_REGEX.test(pathname) && pathname.includes('/dash')) {
             userButton = (
                 <button
@@ -138,7 +140,7 @@ const DashHeader = () => {
             <header className="dash-header">
                 <div className={`dash-header__container ${dashClass}`}>
                     <Link to="/dash">
-                        <h1 className="dash-header__title">BoulderBuds</h1>
+                        <h1 className="dash-header__title"><img src={Logo} alt="" />BoulderBuds</h1>
                     </Link>
                     <nav className="dash-header__nav">
                         {buttonContent}

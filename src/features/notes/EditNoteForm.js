@@ -6,7 +6,7 @@ import { faSave, faTrashCan } from "@fortawesome/free-solid-svg-icons"
 import useAuth from "../../hooks/useAuth"
 
 const EditNoteForm = ({ note, users }) => {
-    const { isManager, isAdmin } = useAuth()
+    const { isAdmin } = useAuth()
 
     const [updateNote, {
         isLoading,
@@ -76,7 +76,7 @@ const EditNoteForm = ({ note, users }) => {
     const errContent = (error?.data?.message || delerror?.data?.message) ?? ''
 
     let deleteButton = null
-    if (isManager || isAdmin ) {
+    if ( isAdmin ) {
         deleteButton = (
             <button
                 className="icon-button"

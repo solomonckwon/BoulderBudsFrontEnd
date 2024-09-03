@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import useAuth from '../../hooks/useAuth'
+import ClimbsList from '../climbs/ClimbsList'
 
 const Welcome = () => {
     const { username, isAdmin } = useAuth()
@@ -13,6 +14,8 @@ const Welcome = () => {
             <p>{today}</p>
 
             <h1>Welcome {username}!</h1>
+
+            <ClimbsList />
 
             <p><Link to="/dash/notes">View Notes</Link></p>
 

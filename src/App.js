@@ -19,6 +19,7 @@ import useTitle from './hooks/useTitle'
 
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import ClimbsList from './features/climbs/ClimbsList'
 
 const darkTheme = createTheme({
   palette: {
@@ -61,6 +62,7 @@ function App() {
                     </Route>
 
                     <Route path="climbs">
+                      <Route index element={<ClimbsList />} />
                       <Route path=":id" element={<Climb />} />
                     </Route>
                   

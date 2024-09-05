@@ -9,6 +9,8 @@ import usePersist from '../../hooks/usePersist'
 
 import PulseLoader from 'react-spinners/PulseLoader'
 
+import { Box, TextField, Button, Typography, Checkbox, FormControlLabel, Container } from '@mui/material'
+
 const Login = () => {
     const userRef = useRef()
     const errRef = useRef()
@@ -29,7 +31,6 @@ const Login = () => {
     useEffect(() => {
         setErrMsg('');
     }, [username, password])
-
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -57,60 +58,70 @@ const Login = () => {
     const handlePwdInput = (e) => setPassword(e.target.value)
     const handleToggle = () => setPersist(prev => !prev)
 
-    const errClass = errMsg ? "errmsg" : "offscreen"
-
     if (isLoading) return <PulseLoader color={"#FFF"} />
 
-    const content = (
-        <section className="public">
-            <header>
-                <h1>Login</h1>
-            </header>
-            <main className="login">
-                <p ref={errRef} className={errClass} aria-live="assertive">{errMsg}</p>
+    return (
+        <Container maxWidth="xs">
+            <Box sx={{ mt: 5 }}>
+                <Typography variant="h4" component="h1" align="center" gutterBottom>
+                    Login
+                </Typography>
+                <Box
+                    component="form"
+                    onSubmit={handleSubmit}
+                    sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}
+                >
+                    <Typography
+                        ref={errRef}
+                        color="error"
+                        variant="body1"
+                        sx={{ visibility: errMsg ? 'visible' : 'hidden' }}
+                    >
+                        {errMsg}
+                    </Typography>
 
-                <form className="form" onSubmit={handleSubmit}>
-                    <label htmlFor="username">Username:</label>
-                    <input
-                        className="form__input"
-                        type="text"
-                        id="username"
-                        ref={userRef}
+                    <TextField
+                        label="Username"
+                        variant="outlined"
+                        inputRef={userRef}
                         value={username}
                         onChange={handleUserInput}
                         autoComplete="off"
+                        fullWidth
                         required
                     />
 
-                    <label htmlFor="password">Password:</label>
-                    <input
-                        className="form__input"
+                    <TextField
+                        label="Password"
+                        variant="outlined"
                         type="password"
-                        id="password"
-                        onChange={handlePwdInput}
                         value={password}
+                        onChange={handlePwdInput}
+                        fullWidth
                         required
                     />
-                    <button className="form__submit-button">Sign In</button>
 
-                    <label htmlFor='persist' className='form_persist'>
-                        <input
-                            type="checkbox"
-                            className='form__checkbox'
-                            id='persist'
-                            onChange={handleToggle}
-                            checked={persist}
+                    <FormControlLabel
+                        control={
+                            <Checkbox
+                                checked={persist}
+                                onChange={handleToggle}
+                                color="primary"
                             />
-                            Trust This Device
-                    </label>
-                </form>
-            </main>
-            <footer>
-                <Link to="/">Back to Home</Link>
-            </footer>
-        </section>
-    )
+                        }
+                        label="Trust This Device"
+                    />
 
-    return content
+                    <Button type="submit" variant="contained" fullWidth>
+                        Sign In
+                    </Button>
+                </Box>
+                <Typography variant="body2" align="center" sx={{ mt: 2 }}>
+                    <Link to="/">Back to Home</Link>
+                </Typography>
+            </Box>
+        </Container>
+    )
 }
+
 export default Login

@@ -1,26 +1,45 @@
-import { Link } from 'react-router-dom'
+import { Container, Box, Typography, Button } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const Public = () => {
     const content = (
-        <>
-            
-            <section className="public">
-                <header className='public-header'>
-                    <h1>Welcome to <span className="nowrap">BoulderBuds!</span></h1>
+        <Container maxWidth="sm">
+            <Box 
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    minHeight: '100vh',
+                    textAlign: 'center',
+                    padding: 3
+                }}
+            >
+                <header>
+                    <Typography variant="h3" component="h1" gutterBottom>
+                        Welcome to <span style={{ whiteSpace: 'nowrap' }}>BoulderBuds!</span>
+                    </Typography>
                 </header>
-                <main className="public__main">
-                    <p>For friendly competition to encourage competitive spirit of climbers.</p>
-                    <br />
+                <main>
+                    <Typography variant="body1" paragraph>
+                        For friendly competition to encourage the competitive spirit of climbers.
+                    </Typography>
                 </main>
                 <footer>
-                <div className='public-footer'>
-                    <Link to="/login">User Login</Link>
-                </div>
+                    <Button 
+                        component={Link} 
+                        to="/login" 
+                        variant="contained" 
+                        color="primary"
+                        sx={{ mt: 2 }}
+                    >
+                        User Login
+                    </Button>
                 </footer>
-            </section>
-        </>
+            </Box>
+        </Container>
+    );
+    return content;
+};
 
-    )
-    return content
-}
-export default Public
+export default Public;

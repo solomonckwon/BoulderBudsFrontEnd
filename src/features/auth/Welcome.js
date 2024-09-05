@@ -15,7 +15,7 @@ const Welcome = () => {
 
             <h1>Welcome {username}!</h1>
 
-            <ClimbsList />
+            {/* <ClimbsList /> */}
 
             <p><Link to="/dash/notes">View Notes</Link></p>
 

@@ -3,7 +3,8 @@ import { setCredentials } from '../../features/auth/authSlice'
 
 
 const baseQuery = fetchBaseQuery({
-    baseUrl: 'http://localhost:3500',
+    baseUrl: 'https://boulderbuds-api.onrender.com/',
+    // baseUrl: 'http://localhost:3500',
     credentials: 'include',
     prepareHeaders: (headers, { getState }) => {
         const token = getState().auth.token
@@ -34,7 +35,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
         } else { 
             if (refreshResult?.error?.status === 403) {
                 // Refresh auth token expired
-                refreshResult.error.data.message = "Login expired. "
+                refreshResult.error.data.message = "Login expired."
             }
             
             return refreshResult

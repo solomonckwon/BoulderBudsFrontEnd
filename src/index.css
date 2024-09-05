@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap');
 
 * {
   margin: 0;
@@ -10,13 +10,13 @@
 
 :root {
   /* COLORS */
-  --BGCOLOR: #16712284;
-  --BORDER-COLOR: #FFF;
+  --BGCOLOR: hsla(103, 8%, 16%, 0.375);
+  --BORDER-COLOR: #ffffffa7;
   --COLOR: #FFF;
   --ERROR: firebrick;
   --INACTIVE: lightgray;
   --LINK-COLOR: whitesmoke;
-  --LINK-HOVER: rgba(245, 245, 245, 0.9);
+  --LINK-HOVER: rgba(206, 206, 206, 0.9);
   --NOTE-BGCOLOR: hsla(240, 64%, 27%, 0.65);
   --STATUS-COMPLETE: limegreen;
   --STATUS-OPEN: firebrick;
@@ -65,7 +65,7 @@
 /* || GENERAL STYLES */
 
 body {
-  font-family: 'Nunito', sans-serif;
+  font-family: "SUSE", sans-serif;
   min-height: 100vh;
   background-color: var(--BGCOLOR);
   color: var(--COLOR);
@@ -129,8 +129,89 @@ a:focus-visible {
   margin-top: 1em;
 }
 
+.public-header {
+  font-size: larger;
+  text-align: center;
+  font-weight: 700;
+}
+
+/* .public-footer {
+  text-align: right;
+} */
+
 .welcome a::before {
   content: "➜ "
+}
+
+/* NAVBAR */
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  position: relative;
+}
+
+/* Logo Container */
+.nav-logo-container img {
+  height: 40px; /* Adjust according to your logo's size */
+}
+
+/* Navbar Links Container */
+.navbar-links-container {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Space between links */
+}
+
+.navbar-links-container a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.navbar-links-container a:hover {
+  color: #f0f0f0; /* Light color on hover */
+}
+
+.navbar-cart-icon {
+  font-size: 24px; /* Adjust size */
+  color: #fff;
+}
+
+.primary-button {
+  background-color: #007bff; /* Primary button color */
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.primary-button:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+}
+
+/* Navbar Menu Container */
+.navbar-menu-container {
+  display: none; /* Hide menu icon on larger screens */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .navbar-links-container {
+    display: none; /* Hide links on mobile */
+  }
+
+  .navbar-menu-container {
+    display: block; /* Show menu icon on mobile */
+  }
 }
 
 /* || DASH HEADER, CONTAINER & FOOTER */
@@ -149,6 +230,12 @@ a:focus-visible {
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
+}
+
+.dash-header__container img {
+  height: 40px; /* Adjust according to your logo's size */
+  padding-top: 0.2em;
+  padding-right: 0.2em;
 }
 
 .dash-header__nav {
@@ -229,6 +316,7 @@ tr {
 .table__cell--inactive {
   background-color: var(--INACTIVE);
 }
+
 
 /* ||  NOTE */
 

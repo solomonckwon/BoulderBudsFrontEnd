@@ -54,11 +54,10 @@ export default function ClimbsList() {
                             >
                                 View Details
                             </Button>
-                            <br></br>
-                            <br></br>
                             <Button
                                 variant="contained"
                                 color="primary"
+                                sx ={{ ml: 1}}
                             >
                                 Edit
                             </Button>

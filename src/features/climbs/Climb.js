@@ -4,6 +4,7 @@ import { useGetClimbsQuery } from './climbsApiSlice';
 import { useGetAllCommentsForClimbQuery } from '../comments/commentsApiSlice';
 import { PulseLoader } from 'react-spinners';
 import { Container, Typography, Box, Paper, CircularProgress } from '@mui/material';
+import CommentsList from '../comments/CommentsList'
 
 const Climb = () => {
     const { id } = useParams(); // Extract climbId from the URL parameters
@@ -15,13 +16,7 @@ const Climb = () => {
         }),
     });
 
-    const { comments, isLoading: isCommentsLoading } = useGetAllCommentsForClimbQuery(id, {
-        selectFromResult: ({ data }) => ({
-            comments: data || []
-        }),
-    });
-
-    if (!climb || isCommentsLoading) {
+    if (!climb ) {
         return (
             <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
                 <CircularProgress color="primary" />
@@ -33,7 +28,7 @@ const Climb = () => {
     const updated = new Date(climb.updatedAt).toLocaleString('en-US', { day: 'numeric', month: 'long', year: 'numeric' });
 
     return (
-        <Container maxWidth="sm" sx={{ mt: 4 }}>
+        <Container maxWidth="sm" sx={{ mt: 7 }}>
             <Paper elevation={3} sx={{ p: 3 }}>
                 <Typography variant="h4" component="h2" gutterBottom>
                     {climb.name}
@@ -51,6 +46,9 @@ const Climb = () => {
                     <strong>Updated:</strong> {updated}
                 </Typography>
             </Paper>
+
+            <CommentsList climbId={id} />
+
         </Container>
     );
 };

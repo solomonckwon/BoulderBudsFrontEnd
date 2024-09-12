@@ -75,7 +75,7 @@ export default function ClimbsList() {
                             <TableCell>Climb</TableCell>
                             <TableCell align="right">Grade</TableCell>
                             <TableCell align="right">Quality</TableCell>
-                            <TableCell align="right">Actions</TableCell> {/* New Actions column */}
+                            <TableCell align="right">Actions</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>

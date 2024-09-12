@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
 import useAuth from '../../hooks/useAuth'
 import ClimbsList from '../climbs/ClimbsList'
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 
 const Welcome = () => {
     const { username, isAdmin } = useAuth()
@@ -17,13 +19,34 @@ const Welcome = () => {
 
             <ClimbsList />
 
-            <p><Link to="/dash/notes">View Notes</Link></p>
-
-            <p><Link to="/dash/notes/new">Add New Notes</Link></p>
-
-            {(isAdmin) && <p><Link to="/dash/users">View User Settings</Link></p>}
-
-            {(isAdmin) && <p><Link to="/dash/users/new">Add New User</Link></p>}
+            <Stack spacing={2} direction="row">
+            <Button variant='contained'>
+                    <Link to="/dash/climbs">View Climbs</Link>
+                </Button>
+                <Button variant='contained'>
+                    <Link to="/dash/climbs/new">Add New Climb</Link>
+                </Button>
+            </Stack>
+            
+            <Stack spacing={2} direction="row">
+                <Button variant='contained'>
+                    <Link to="/dash/notes">View Notes</Link>
+                </Button>
+                <Button variant='contained'>
+                    <Link to="/dash/notes/new">Add New Note</Link>
+                </Button>
+            </Stack>
+            
+            {(isAdmin) &&
+                <Stack spacing={2} direction="row">
+                    <Button variant='contained'>
+                        <Link to="/dash/users">View User Settings</Link>
+                    </Button>
+                    <Button variant='contained'>
+                        <Link to="/dash/users/new">Add New User</Link>
+                    </Button>
+                </Stack>
+            }
 
         </section>
     )

@@ -1,25 +1,36 @@
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import { useAddNewClimbMutation } from "./climbsApiSlice"
-import { TextField, Button, Container, Typography, Alert, Box, Rating } from '@mui/material'
+import { useUpdateClimbMutation, useDeleteClimbMutation } from "./climbsApiSlice"
+import { TextField, Button, Container, Typography, Alert, Box, Rating, Stack } from '@mui/material'
+import DeleteIcon from '@mui/icons-material/Delete';
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 
-const NewClimbForm = ({ users }) => {
-    const [addNewClimb, { isLoading, isSuccess, isError, error }] = useAddNewClimbMutation()
+const EditClimbForm = ({ climb }) => {
+    const [updateClimb, { 
+        isLoading, 
+        isSuccess, 
+        isError, 
+        error 
+    }] = useUpdateClimbMutation()
+    const [deleteClimb, { 
+        isSuccess: isDelSuccess, 
+        isError: isDelError, 
+        error: delError 
+    }] = useDeleteClimbMutation()
     const navigate = useNavigate()
 
-    const [name, setName] = useState('')
-    const [grade, setGrade] = useState('')
-    const [quality, setQuality] = useState()
+    const [name, setName] = useState(climb.name)
+    const [grade, setGrade] = useState(climb.grade)
+    const [quality, setQuality] = useState(climb.quality)
 
     useEffect(() => {
-        if (isSuccess) {
+        if (isSuccess || isDelSuccess) {
             setName('')
             setGrade('')
             setQuality('')
             navigate('/dash/climbs')
         }
-    }, [isSuccess, navigate])
+    }, [isSuccess, isDelSuccess, navigate])
 
     const onNameChanged = e => setName(e.target.value)
     const onGradeChanged = e => setGrade(e.target.value)
@@ -30,8 +41,12 @@ const NewClimbForm = ({ users }) => {
     const onSaveClimbClicked = async (e) => {
         e.preventDefault()
         if (canSave) {
-            await addNewClimb({ name, grade, quality })
+            await updateClimb({ id: climb.id, name, grade, quality })
         }
+    }
+
+    const onDeleteClimbClicked = async () => {
+        await deleteClimb({ id: climb.id })
     }
 
 
@@ -42,8 +57,8 @@ const NewClimbForm = ({ users }) => {
             )}
 
             <form onSubmit={onSaveClimbClicked}>
-                <Typography variant="h4" sx={{textAlign: 'center'}}gutterBottom>
-                    Create a New Climb
+                <Typography variant="h4" sx={{ textAlign: 'center' }} gutterBottom>
+                    Edit Climb
                 </Typography>
 
                 <Box display="flex" alignItems="center" justifyContent="center" sx={{ mb: 2 }}>
@@ -67,7 +82,6 @@ const NewClimbForm = ({ users }) => {
                     />
                 </Box>
 
-
                 <Box display="flex" justifyContent="center">
                     <Rating
                         name="quality-rating"
@@ -78,21 +92,27 @@ const NewClimbForm = ({ users }) => {
                     />
                 </Box>
 
-                <Button
-                    variant="contained"
-                    color="primary"
-                    fullWidth
-                    startIcon={<SaveOutlinedIcon />}
-                    type="submit"
-                    disabled={!canSave}
-                    sx={{ mt: 4}}
-                >
-                    Save
-                </Button>
-
+                <Stack direction="row" spacing={2} sx={{ mt: 4, justifyContent: 'center' }}>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        startIcon={<SaveOutlinedIcon />}
+                        type="submit"
+                        disabled={!canSave}
+                    >
+                        Save
+                    </Button>
+                    <Button 
+                        variant="outlined" 
+                        startIcon={<DeleteIcon />}
+                        onClick={onDeleteClimbClicked}
+                    >
+                        Delete
+                    </Button>
+                </Stack>
             </form>
         </Container>
     )
 }
 
-export default NewClimbForm
+export default EditClimbForm

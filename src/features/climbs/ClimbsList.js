@@ -1,12 +1,15 @@
 import * as React from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import Button from '@mui/material/Button'; // Import Button component from MUI
+import { 
+    Table, 
+    Rating, 
+    TableBody, 
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    Paper,
+    Button
+} from '@mui/material';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate from react-router-dom
 
 import { useGetClimbsQuery } from './climbsApiSlice';
@@ -45,12 +48,19 @@ export default function ClimbsList() {
                     <TableRow key={climbId}>
                         <TableCell>{climb.name}</TableCell>
                         <TableCell align="right">{climb.grade}</TableCell>
-                        <TableCell align="right">{climb.quality}</TableCell>
+                        <TableCell align="right">
+                            <Rating
+                                name="read-only"
+                                value={climb.quality}
+                                precision={0.5} // Allow half stars
+                                readOnly
+                            />
+                        </TableCell>
                         <TableCell align="right">
                             <Button
                                 variant="contained"
                                 color="primary"
-                                onClick={() => navigate(`/dash/climbs/${climbId}`)}
+                                onClick={() => navigate(`/dash/climbs/details/${climbId}`)}
                             >
                                 View Details
                             </Button>
@@ -58,6 +68,7 @@ export default function ClimbsList() {
                                 variant="contained"
                                 color="primary"
                                 sx ={{ ml: 1}}
+                                onClick={() => navigate(`/dash/climbs/edit/${climbId}`)}
                             >
                                 Edit
                             </Button>

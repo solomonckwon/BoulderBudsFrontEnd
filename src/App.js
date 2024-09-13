@@ -12,7 +12,8 @@ import EditNote from './features/notes/EditNote'
 import NewNote from './features/notes/NewNote'
 import Prefetch from './features/auth/Prefetch'
 import PersistLogin from './features/auth/PersistLogin'
-import Climb from './features/climbs/Climb'
+import ClimbDetails from './features/climbs/ClimbDetails'
+import EditClimb from './features/climbs/EditClimb'
 import { ROLES } from './config/roles'
 import RequireAuth from './features/auth/RequireAuth'
 import useTitle from './hooks/useTitle'
@@ -64,7 +65,8 @@ function App() {
 
                     <Route path="climbs">
                       <Route index element={<ClimbsList />} />
-                      <Route path=":id" element={<Climb />} />
+                      <Route path="details/:id" element={<ClimbDetails />} />
+                      <Route path="edit/:id" element={<EditClimb />} />
                       <Route path='new' element={<NewClimb />} />
                     </Route>
                   

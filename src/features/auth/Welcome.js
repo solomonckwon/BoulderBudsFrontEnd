@@ -1,33 +1,34 @@
-import { Link } from 'react-router-dom'
-import useAuth from '../../hooks/useAuth'
-import ClimbsList from '../climbs/ClimbsList'
+import { Typography } from '@mui/material';
+import useAuth from '../../hooks/useAuth';
+import ClimbsList from '../climbs/ClimbsList';
+import NotesList from '../notes/NotesList';
+import Box from '@mui/material/Box';
 
 const Welcome = () => {
-    const { username, isAdmin } = useAuth()
+    const { username } = useAuth();
 
-    const date = new Date()
-    const today = new Intl.DateTimeFormat('en-US', { dateStyle: 'full', timeStyle: 'long' }).format(date)
+    const date = new Date();
+    const today = new Intl.DateTimeFormat('en-US', { dateStyle: 'full', timeStyle: 'long' }).format(date);
 
     const content = (
-        <section className="welcome">
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, minHeight: '95vh' }}>
+            <Box sx={{ flex: 1 }}>
+                <h1>Welcome {username}!</h1>
+    
+                <h3>Climbs</h3>
+                <ClimbsList />
+    
+                <h3>Notes</h3>
+                <NotesList />
+            </Box>
 
-            <p>{today}</p>
+            <Typography sx={{ alignSelf: 'flex-end', p: 1 }}>
+                {today}
+            </Typography>
+        </Box>
+    );
 
-            <h1>Welcome {username}!</h1>
-
-            <ClimbsList />
-
-            <p><Link to="/dash/notes">View Notes</Link></p>
-
-            <p><Link to="/dash/notes/new">Add New Notes</Link></p>
-
-            {(isAdmin) && <p><Link to="/dash/users">View User Settings</Link></p>}
-
-            {(isAdmin) && <p><Link to="/dash/users/new">Add New User</Link></p>}
-
-        </section>
-    )
-
-    return content
+    return content;
 }
-export default Welcome
+
+export default Welcome;

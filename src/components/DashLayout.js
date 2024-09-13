@@ -1,14 +1,31 @@
-import { Outlet } from 'react-router-dom'
-import DashSidebar from './DashSidebar'
+import * as React from 'react';
+import DashSidebar from './DashSidebar'; // Make sure this path is correct
+import Box from '@mui/material/Box'; // For consistent layout
+import { Outlet } from 'react-router-dom';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const DashLayout = () => {
+    const isMobile = useMediaQuery('(max-width:600px)');
+
     return (
-        <>
+        <Box sx={{ display: 'flex' }}>
+            {/* Sidebar */}
             <DashSidebar />
-            <div className="dash-container">
+
+            {/* Content container, margin adjusted based on screen size */}
+            <Box
+                component="main"
+                sx={{
+                    flexGrow: 1,
+                    p: 3,
+                    ml: isMobile ? 0 : '240px', // If not mobile, apply margin for sidebar width
+                    mt: isMobile ? '56px' : '0px', // Mobile adjustment for top bar or menu icon
+                }}
+            >
                 <Outlet />
-            </div>
-        </>
-    )
-}
-export default DashLayout
+            </Box>
+        </Box>
+    );
+};
+
+export default DashLayout;

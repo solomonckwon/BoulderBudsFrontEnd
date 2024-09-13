@@ -12,32 +12,42 @@ import TextSnippetOutlinedIcon from '@mui/icons-material/TextSnippetOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import Logo from "../assets/Logo.svg";
 import { useNavigate, Link } from 'react-router-dom';
-import { useSendLogoutMutation } from '../features/auth/authApiSlice'
-import useAuth from '../hooks/useAuth'
-import Box from '@mui/material/Box'; // Import Box for layout
+import { useSendLogoutMutation } from '../features/auth/authApiSlice';
+import useAuth from '../hooks/useAuth';
+import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu'; // For hamburger menu icon
+import Drawer from '@mui/material/Drawer'; // Drawer for responsive menu
+import useMediaQuery from '@mui/material/useMediaQuery'; // To handle media queries
 
 export default function DashboardSidebar() {
     const { isAdmin } = useAuth();
     const navigate = useNavigate();
     const [sendLogout] = useSendLogoutMutation();
+    const [mobileOpen, setMobileOpen] = React.useState(false);
 
-    const handleLogout = () => {
-        sendLogout(); // Assuming this function logs the user out
-        navigate('/'); // Navigate to the root URL after logout
+    // Handle the opening and closing of the drawer on mobile
+    const handleDrawerToggle = () => {
+        setMobileOpen(!mobileOpen);
     };
 
-    return (
-        <Paper 
+    const handleLogout = () => {
+        sendLogout();
+        navigate('/');
+    };
+
+    // Detect if the screen is small (like mobile)
+    const isMobile = useMediaQuery('(max-width:600px)');
+
+    const drawerContent = (
+        <Paper
             sx={{
                 width: 240,
-                height: '100vh',
-                position: 'fixed',
-                top: 0,
-                left: 0,
+                height: '100%',
                 bgcolor: 'background.paper',
-                display: 'flex',              // Make the Paper a flex container
-                flexDirection: 'column',      // Arrange children vertically
-                justifyContent: 'space-between', // Push content apart
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
                 boxShadow: 3,
             }}
         >
@@ -82,7 +92,7 @@ export default function DashboardSidebar() {
                     </MenuItem>
                 </Link>
                 <Divider />
-                {(isAdmin) && (
+                {isAdmin && (
                     <>
                         <Link to="/dash/users">
                             <MenuItem>
@@ -113,5 +123,56 @@ export default function DashboardSidebar() {
                 </MenuItem>
             </Box>
         </Paper>
+    );
+
+    return (
+        <>
+            {isMobile ? (
+                <>
+                    {/* Mobile: Hamburger Menu Icon */}
+                    <IconButton
+                        color="inherit"
+                        aria-label="open drawer"
+                        edge="start"
+                        onClick={handleDrawerToggle}
+                        sx={{ ml: 2, mt: 2 }}
+                    >
+                        <MenuIcon />
+                    </IconButton>
+                    {/* Mobile: Drawer */}
+                    <Drawer
+                        variant="temporary"
+                        open={mobileOpen}
+                        onClose={handleDrawerToggle}
+                        ModalProps={{
+                            keepMounted: true, // Better open performance on mobile.
+                        }}
+                        sx={{
+                            '& .MuiDrawer-paper': { width: 240 },
+                        }}
+                    >
+                        {drawerContent}
+                    </Drawer>
+                </>
+            ) : (
+                // Desktop: Permanent Sidebar
+                <Paper
+                    sx={{
+                        width: 240,
+                        height: '100vh',
+                        position: 'fixed',
+                        top: 0,
+                        left: 0,
+                        bgcolor: 'background.paper',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'space-between',
+                        boxShadow: 3,
+                    }}
+                >
+                    {drawerContent}
+                </Paper>
+            )}
+        </>
     );
 }

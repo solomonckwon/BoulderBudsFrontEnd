@@ -1,12 +1,10 @@
 import React from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useGetClimbsQuery } from './climbsApiSlice';
 import { CircularProgress, Container, Typography, Box, Rating } from '@mui/material';
-import CommentsList from '../comments/CommentsList';
 
 const ClimbDetails = () => {
     const { id } = useParams(); // Extract climbId from the URL parameters
-    const navigate = useNavigate();
 
     const { climb } = useGetClimbsQuery("climbsList", {
         selectFromResult: ({ data }) => ({
@@ -26,7 +24,7 @@ const ClimbDetails = () => {
     const updated = new Date(climb.updatedAt).toLocaleString('en-US', { day: 'numeric', month: 'long', year: 'numeric' });
 
     return (
-        <Container maxWidth="sm" sx={{ display: 'flex', flexFlow: 'column nowrap', gap: '0.75em', mt: '1em' }}>
+        <Container maxWidth="md" sx={{ display: 'flex', flexFlow: 'column nowrap', gap: '0.75em', mt: '1em' }}>
 
             <Box display="flex" alignItems="center" justifyContent="space-between">
                 <Typography variant="h4" component="h2" gutterBottom>
@@ -48,9 +46,6 @@ const ClimbDetails = () => {
             <Box display="flex" alignItems="center" justifyContent="space-between">
                 <Typography variant="b1" gutterBottom>Created:<br />{created}</Typography>
                 <Typography variant="b1" gutterBottom>Updated:<br />{updated}</Typography>
-            </Box>
-            <Box mt={4}>
-                <CommentsList climbId={id} />
             </Box>
         </Container>
     );

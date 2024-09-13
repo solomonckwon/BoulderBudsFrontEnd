@@ -56,6 +56,10 @@ const EditClimbForm = ({ climb }) => {
                 <Alert severity="error">{error?.data?.message}</Alert>
             )}
 
+            {isDelError && (
+                <Alert severity="error">{delError?.data?.message}</Alert>
+            )}
+
             <form onSubmit={onSaveClimbClicked}>
                 <Typography variant="h4" sx={{ textAlign: 'center' }} gutterBottom>
                     Edit Climb

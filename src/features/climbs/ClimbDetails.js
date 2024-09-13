@@ -1,4 +1,5 @@
 import React from 'react';
+<<<<<<< Updated upstream
 import { useParams, useNavigate } from 'react-router-dom';
 import { useGetClimbsQuery } from './climbsApiSlice';
 import { CircularProgress, Container, Typography, Box, Rating } from '@mui/material';
@@ -7,6 +8,14 @@ import CommentsList from '../comments/CommentsList';
 const ClimbDetails = () => {
     const { id } = useParams(); // Extract climbId from the URL parameters
     const navigate = useNavigate();
+=======
+import { useParams } from 'react-router-dom';
+import { useGetClimbsQuery } from './climbsApiSlice';
+import { CircularProgress, Container, Typography, Box, Rating } from '@mui/material';
+
+const ClimbDetails = () => {
+    const { id } = useParams(); // Extract climbId from the URL parameters
+>>>>>>> Stashed changes
 
     const { climb } = useGetClimbsQuery("climbsList", {
         selectFromResult: ({ data }) => ({
@@ -49,9 +58,12 @@ const ClimbDetails = () => {
                 <Typography variant="b1" gutterBottom>Created:<br />{created}</Typography>
                 <Typography variant="b1" gutterBottom>Updated:<br />{updated}</Typography>
             </Box>
+<<<<<<< Updated upstream
             <Box mt={4}>
                 <CommentsList climbId={id} />
             </Box>
+=======
+>>>>>>> Stashed changes
         </Container>
     );
 };

@@ -10,7 +10,7 @@
 
 :root {
   /* COLORS */
-  --BGCOLOR: hsla(103, 8%, 16%, 0.375);
+  --BGCOLOR: hsla(0, 0%, 33%, 0.922);
   --BORDER-COLOR: #ffffffa7;
   --COLOR: #FFF;
   --ERROR: firebrick;

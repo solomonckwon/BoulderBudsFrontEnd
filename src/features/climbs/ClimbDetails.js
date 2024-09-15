@@ -24,7 +24,7 @@ const ClimbDetails = () => {
     const updated = new Date(climb.updatedAt).toLocaleString('en-US', { day: 'numeric', month: 'long', year: 'numeric' });
 
     return (
-        <Container maxWidth="sm" sx={{ display: 'flex', flexFlow: 'column nowrap', gap: '0.75em', mt: '1em' }}>
+        <Container maxWidth="md" sx={{ display: 'flex', flexFlow: 'column nowrap', gap: '0.75em', mt: '1em' }}>
 
             <Box display="flex" alignItems="center" justifyContent="space-between">
                 <Typography variant="h4" component="h2" gutterBottom>

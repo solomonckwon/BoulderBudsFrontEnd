@@ -1,6 +1,6 @@
 import * as React from 'react';
-import DashSidebar from './DashSidebar'; // Make sure this path is correct
-import Box from '@mui/material/Box'; // For consistent layout
+import DashSidebar from './DashSidebar';
+import Box from '@mui/material/Box';
 import { Outlet } from 'react-router-dom';
 import useMediaQuery from '@mui/material/useMediaQuery';
 

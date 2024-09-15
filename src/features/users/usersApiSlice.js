@@ -65,6 +65,28 @@ export const usersApiSlice = apiSlice.injectEndpoints({
                 { type: 'User', id: arg.id }
             ]
         }),
+        // Add friend mutation
+        addFriend: builder.mutation({
+            query: ({ userId, friendId }) => ({
+                url: `/users/${userId}/addFriend`,
+                method: 'PATCH',
+                body: { friendId }
+            }),
+            invalidatesTags: (result, error, arg) => [
+                { type: 'User', id: arg.userId }
+            ]
+        }),
+        // Remove friend mutation
+        removeFriend: builder.mutation({
+            query: ({ userId, friendId }) => ({
+                url: `/users/${userId}/removeFriend`,
+                method: 'PATCH',
+                body: { friendId }
+            }),
+            invalidatesTags: (result, error, arg) => [
+                { type: 'User', id: arg.userId }
+            ]
+        })
     }),
 })
 
@@ -73,6 +95,8 @@ export const {
     useAddNewUserMutation,
     useUpdateUserMutation,
     useDeleteUserMutation,
+    useAddFriendMutation, 
+    useRemoveFriendMutation, 
 } = usersApiSlice
 
 // returns the query result object
@@ -84,7 +108,7 @@ const selectUsersData = createSelector(
     usersResult => usersResult.data // normalized state object with ids & entities
 )
 
-//getSelectors creates these selectors and we rename them with aliases using destructuring
+// getSelectors creates these selectors and we rename them with aliases using destructuring
 export const {
     selectAll: selectAllUsers,
     selectById: selectUserById,

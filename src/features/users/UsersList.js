@@ -1,5 +1,15 @@
+import { 
+    Table, 
+    TableBody, 
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    Paper,
+    Button
+} from '@mui/material';
+
 import { useGetUsersQuery } from "./usersApiSlice"
-import User from './User'
 import { PulseLoader } from "react-spinners"
 
 const UsersList = () => {
@@ -26,25 +36,42 @@ const UsersList = () => {
 
     if (isSuccess) {
 
-        const { ids } = users
+        const { ids, entities } = users
 
-        const tableContent = ids?.length
-            ? ids.map(userId => <User key={userId} userId={userId} />)
-            : null
+        const rows = ids?.length
+            ? ids.map(userId => {
+                const user = entities[userId];
+                return (
+                    <TableRow key={userId}>
+                        <TableCell align="right">{user.username}</TableCell>
+                        <TableCell align="right">{user.roles}</TableCell>
+                        <TableCell align="right">{user.active}</TableCell>
+                        <TableCell align="right">
+                            <Button>
+                                Button
+                            </Button>
+                        </TableCell>
+                    </TableRow> 
+                );
+            })
+            : null;
 
         content = (
-            <table className="table table--users">
-                <thead className="table__thead">
-                    <tr>
-                        <th scope="col" className="table__th user__username">Username</th>
-                        <th scope="col" className="table__th user__roles">Roles</th>
-                        <th scope="col" className="table__th user__edit">Edit</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {tableContent}
-                </tbody>
-            </table>
+            <TableContainer component={Paper}>
+                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell align="right">Username</TableCell>
+                            <TableCell align="right">Roles</TableCell>
+                            <TableCell align="right">Status</TableCell>
+                            <TableCell align="right">Actions</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {rows}
+                    </TableBody>
+                </Table>
+            </TableContainer>
         )
     }
 

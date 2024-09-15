@@ -1,10 +1,16 @@
 import * as React from 'react';
 import Divider from '@mui/material/Divider';
 import Paper from '@mui/material/Paper';
-import MenuList from '@mui/material/MenuList';
-import MenuItem from '@mui/material/MenuItem';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemIcon from '@mui/material/ListItemIcon';
+import { 
+    MenuList,
+    MenuItem,
+    ListItemText,
+    ListItemIcon,
+    Box,
+    Drawer,
+    useMediaQuery,
+    IconButton
+} from '@mui/material';
 import SegmentOutlinedIcon from '@mui/icons-material/SegmentOutlined';
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 import NoteAddOutlinedIcon from '@mui/icons-material/NoteAddOutlined';
@@ -14,14 +20,11 @@ import Logo from "../assets/Logo.svg";
 import { useNavigate, Link } from 'react-router-dom';
 import { useSendLogoutMutation } from '../features/auth/authApiSlice';
 import useAuth from '../hooks/useAuth';
-import Box from '@mui/material/Box';
-import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu'; // For hamburger menu icon
-import Drawer from '@mui/material/Drawer'; // Drawer for responsive menu
-import useMediaQuery from '@mui/material/useMediaQuery'; // To handle media queries
+import { Avatar } from '@mui/material';
 
 export default function DashboardSidebar() {
-    const { isAdmin } = useAuth();
+    const { username, isAdmin } = useAuth();
     const navigate = useNavigate();
     const [sendLogout] = useSendLogoutMutation();
     const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -58,66 +61,63 @@ export default function DashboardSidebar() {
             </Link>
             <MenuList sx={{ flexGrow: 1 }}>
                 <Divider />
-                <Link to="/dash/climbs">
-                    <MenuItem>
-                        <ListItemIcon>
-                            <SegmentOutlinedIcon fontSize="small" />
-                        </ListItemIcon>
-                        <ListItemText>View Climbs</ListItemText>
-                    </MenuItem>
-                </Link>
-                <Link to="/dash/climbs/new">
-                    <MenuItem>
-                        <ListItemIcon>
-                            <AddCircleOutlineOutlinedIcon fontSize="small" />
-                        </ListItemIcon>
-                        <ListItemText>Add New Climb</ListItemText>
-                    </MenuItem>
-                </Link>
+
+                <MenuItem component={Link} to="/dash/climbs">
+                    <ListItemIcon>
+                        <SegmentOutlinedIcon fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText>View Climbs</ListItemText>
+                </MenuItem>
+                <MenuItem component={Link} to="/dash/climbs/new">
+                    <ListItemIcon>
+                        <AddCircleOutlineOutlinedIcon fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText>Add New Climb</ListItemText>
+                </MenuItem>
                 <Divider />
-                <Link to="/dash/notes">
-                    <MenuItem>
-                        <ListItemIcon>
-                            <TextSnippetOutlinedIcon fontSize="small" />
-                        </ListItemIcon>
-                        <ListItemText>View Notes</ListItemText>
-                    </MenuItem>
-                </Link>
-                <Link to="/dash/notes/new">
-                    <MenuItem>
-                        <ListItemIcon>
-                            <NoteAddOutlinedIcon fontSize="small" />
-                        </ListItemIcon>
-                        <ListItemText>Add New Note</ListItemText>
-                    </MenuItem>
-                </Link>
+                <MenuItem component={Link} to="/dash/notes">
+                    <ListItemIcon>
+                        <TextSnippetOutlinedIcon fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText>View Notes</ListItemText>
+                </MenuItem>
+
+                <MenuItem component={Link} to="/dash/notes/new">
+                    <ListItemIcon>
+                        <NoteAddOutlinedIcon fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText>Add New Note</ListItemText>
+                </MenuItem>
+
                 <Divider />
                 {isAdmin && (
-                    <>
-                        <Link to="/dash/users">
-                            <MenuItem>
-                                <ListItemIcon>
-                                    <NoteAddOutlinedIcon fontSize="small" />
-                                </ListItemIcon>
-                                <ListItemText>View User Settings</ListItemText>
-                            </MenuItem>
-                        </Link>
-                        <Link to="/dash/users/new">
-                            <MenuItem>
-                                <ListItemIcon>
-                                    <NoteAddOutlinedIcon fontSize="small" />
-                                </ListItemIcon>
-                                <ListItemText>Add New User</ListItemText>
-                            </MenuItem>
-                        </Link>
+                    <Box>
+                        <MenuItem component={Link}to="/dash/users">
+                            <ListItemIcon>
+                                <NoteAddOutlinedIcon fontSize="small" />
+                            </ListItemIcon>
+                            <ListItemText>View User Settings</ListItemText>
+                        </MenuItem>
+                        <MenuItem component={Link} to="/dash/users/new">
+                            <ListItemIcon>
+                                <NoteAddOutlinedIcon fontSize="small" />
+                            </ListItemIcon>
+                            <ListItemText>Add New User</ListItemText>
+                        </MenuItem>
                         <Divider />
-                    </>
+                    </Box>
                 )}
             </MenuList>
             <Box sx={{ p: 2 }}>
+                <MenuItem component={Link} to='/dash/users/profile'>
+                    <ListItemIcon>
+                        <Avatar sx={{ width: 30, height: 30 }}>{username[0]}</Avatar>
+                    </ListItemIcon>
+                    <ListItemText>Profile</ListItemText>
+                </MenuItem>
                 <MenuItem onClick={handleLogout}>
                     <ListItemIcon>
-                        <LogoutOutlinedIcon fontSize="small" />
+                        <LogoutOutlinedIcon fontSize="medium" />
                     </ListItemIcon>
                     <ListItemText>Log Out</ListItemText>
                 </MenuItem>

@@ -16,8 +16,13 @@ export default function AddFriends() {
         }),
     });
 
-    // Find the current user based on their username
     const currentUser = users?.find(user => user.username === username);
+    const friendIds = currentUser?.friends || [];
+
+    // Filter out the current user and their friends from the users list
+    const filteredUsers = users?.filter(user => {
+        return user.username !== username && !friendIds.includes(user._id);
+    });
 
     // Mutation for adding a friend
     const [addFriend] = useAddFriendMutation();
@@ -53,11 +58,17 @@ export default function AddFriends() {
                             }}
                             fullWidth
                         >
-                            {users?.map((user) => (
-                                <MenuItem key={user.id} value={user.id}>
-                                    {user.username}
+                            {filteredUsers && filteredUsers.length > 0 ? (
+                                filteredUsers.map((user) => (
+                                    <MenuItem key={user.id} value={user.id}>
+                                        {user.username}
+                                    </MenuItem>
+                                ))
+                            ) : (
+                                <MenuItem disabled>
+                                    Friends with everyone!
                                 </MenuItem>
-                            ))}
+                            )}
                         </Select>
                     </FormControl>
                 </Grid>

@@ -119,6 +119,9 @@ const Login = () => {
                 <Typography variant="body2" align="center" sx={{ mt: 2 }}>
                     <Link to="/">Back to Home</Link>
                 </Typography>
+                <Typography variant="body2" align="center" sx={{ mt: 1 }}>
+                    <Link to="/signup">No Account? Click here</Link>
+                </Typography>
             </Box>
         </Container>
     )

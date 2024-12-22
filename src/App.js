@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom'
 import Layout from './components/Layout'
 import Public from './components/Public'
 import Login from './features/auth/Login'
+import SignUp from './features/auth/SignUp'
 import DashLayout from './components/DashLayout'
 import Welcome from './features/auth/Welcome'
 import NotesList from './features/notes/NotesList'
@@ -41,6 +42,7 @@ function App() {
           {/* public routes */}
           <Route index element={<Public />} />
           <Route path="login" element={<Login />} />
+          <Route path="signup" element={<SignUp />} />
 
           {/* protected routes */}
           <Route element={<PersistLogin />}>

@@ -5,6 +5,7 @@ import AddFriend from "./AddFriend"
 import FriendList from "./FriendList"
 
 import Grid from "@mui/material/Grid2"
+import PulseLoader from 'react-spinners/PulseLoader'
 
 export default function Profile() {
     const { username } = useAuth()
@@ -22,6 +23,10 @@ export default function Profile() {
     const friends = currentUser?.friends?.map(friendId =>
         users.find(user => user._id === friendId)
     );
+
+    if (!currentUser) {
+        return <PulseLoader color={"#FFF"} />;
+    }
 
     return (
         <Grid container spacing={2}>

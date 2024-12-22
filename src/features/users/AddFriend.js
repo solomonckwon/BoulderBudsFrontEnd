@@ -16,8 +16,13 @@ export default function AddFriends() {
         }),
     });
 
-    // Find the current user based on their username
     const currentUser = users?.find(user => user.username === username);
+    const friendIds = currentUser?.friends || [];
+
+    // Filter out the current user and their friends from the users list
+    const filteredUsers = users?.filter(user => {
+        return user.username !== username && !friendIds.includes(user._id);
+    });
 
     // Mutation for adding a friend
     const [addFriend] = useAddFriendMutation();
@@ -40,7 +45,7 @@ export default function AddFriends() {
         <Card variant="outlined">
             <Grid container direction="column" justifyContent="center" alignItems="center">
                 {/* Select User from Dropdown */}
-                <Grid item sx={{ p: "1.5rem 0rem", textAlign: "center", width: '70%' }}>
+                <Grid sx={{ p: "1.5rem 0rem", textAlign: "center", width: '70%' }}>
                     <FormControl fullWidth>
                         <InputLabel id="select-user-label">Select User</InputLabel>
                         <Select
@@ -53,16 +58,22 @@ export default function AddFriends() {
                             }}
                             fullWidth
                         >
-                            {users?.map((user) => (
-                                <MenuItem key={user.id} value={user.id}>
-                                    {user.username}
+                            {filteredUsers && filteredUsers.length > 0 ? (
+                                filteredUsers.map((user) => (
+                                    <MenuItem key={user.id} value={user.id}>
+                                        {user.username}
+                                    </MenuItem>
+                                ))
+                            ) : (
+                                <MenuItem disabled>
+                                    Friends with everyone!
                                 </MenuItem>
-                            ))}
+                            )}
                         </Select>
                     </FormControl>
                 </Grid>
 
-                <Grid item xs={12} sx>
+                <Grid xs={12} >
                     <Button variant="contained" onClick={handleAddFriend} fullWidth sx={{ mt: 2, mb: 2, }}>
                         Add Friend
                     </Button>

@@ -4,10 +4,10 @@ import { useGetUsersQuery } from './usersApiSlice'
 // IMPORTS
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid";
 import Avatar from "@mui/material/Avatar";
 import Badge from "@mui/material/Badge";
-import Divider from "@mui/material/Button";
+import Divider from "@mui/material/Divider";
 
 // STYLES
 const styles = {
@@ -53,7 +53,7 @@ export default function ProfileCard({ currentUser }) {
           >
             <Avatar
               sx={{ width: 100, height: 100, mb: 1.5 }}
-            >{currentUser.username[0]}</Avatar>
+            >{currentUser?.username[0]}</Avatar>
           </Badge>
 
           {/* DESCRIPTION */}

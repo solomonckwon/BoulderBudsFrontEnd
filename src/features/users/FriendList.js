@@ -37,7 +37,7 @@ export default function FriendList({ currentUser, friends }) {
             direction="column"
         >
             {friends?.map((friend, index) => (
-                <Grid item xs={12} key={index}>
+                <Grid xs={12} key={index}>
                     <Item>
                         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                             <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>

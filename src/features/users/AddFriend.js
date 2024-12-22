@@ -45,7 +45,7 @@ export default function AddFriends() {
         <Card variant="outlined">
             <Grid container direction="column" justifyContent="center" alignItems="center">
                 {/* Select User from Dropdown */}
-                <Grid item sx={{ p: "1.5rem 0rem", textAlign: "center", width: '70%' }}>
+                <Grid sx={{ p: "1.5rem 0rem", textAlign: "center", width: '70%' }}>
                     <FormControl fullWidth>
                         <InputLabel id="select-user-label">Select User</InputLabel>
                         <Select
@@ -73,7 +73,7 @@ export default function AddFriends() {
                     </FormControl>
                 </Grid>
 
-                <Grid item xs={12} sx>
+                <Grid xs={12} >
                     <Button variant="contained" onClick={handleAddFriend} fullWidth sx={{ mt: 2, mb: 2, }}>
                         Add Friend
                     </Button>

@@ -1,10 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { setCredentials } from '../../features/auth/authSlice'
 
+const baseUrl = process.env.REACT_APP_API_BASE_URL
 
 const baseQuery = fetchBaseQuery({
-    // baseUrl: 'https://boulderbuds-api.onrender.com/',
-    baseUrl: 'http://localhost:3500',
+    baseUrl: baseUrl,
     credentials: 'include',
     prepareHeaders: (headers, { getState }) => {
         const token = getState().auth.token
@@ -18,7 +18,6 @@ const baseQuery = fetchBaseQuery({
 })
 
 const baseQueryWithReauth = async (args, api, extraOptions) => {
-    // console.log some stuff here 
 
     let result = await baseQuery(args, api, extraOptions)
     
